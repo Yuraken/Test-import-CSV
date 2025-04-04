@@ -1,0 +1,10 @@
+services:
+    App\:
+        resource: '../../src/*'
+        exclude: '../../src/{DependencyInjection,Entity,Migrations,Tests}'
+        public: true
+
+    App\Command\ImportCsvCommand:
+        arguments:
+            $csvImporter: '@App\Service\CsvImporter'
+        tags: ['console.command']

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+		{% block title %}Liste des Clients{% endblock %}
+		</title>
+	</head>
+	<body>
+        {% block body %}
+        <h1>Liste des Clients</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer ID</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Entreprise</th>
+                    <th>Ville</th>
+                    <th>Pays</th>
+                    <th>Téléphone 1</th>
+                    <th>Téléphone 2</th>
+                    <th>Email</th>
+                    <th>Date d'abonnement</th>
+                    <th>Site Web</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in csvData %}
+                    <tr>
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.customerId }}</td>
+                        <td>{{ customer.firstName }}</td>
+                        <td>{{ customer.lastName }}</td>
+                        <td>{{ customer.company }}</td>
+                        <td>{{ customer.city }}</td>
+                        <td>{{ customer.country }}</td>
+                        <td>{{ customer.phoneOne }}</td>
+                        <td>{{ customer.phoneTwo }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.subscriptionDate|date('Y-m-d H:i:s') }}</td>
+                        <td><a href="{{ customer.website }}" target="_blank">{{ customer.website }}</a></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="12">Aucun client trouvé. Lancez la commande "php bin/console app:import-csv '.\public\customers-100000.csv'" à la racine du projet</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endblock %}
+	</body>
+</html>
