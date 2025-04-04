@@ -45,7 +45,7 @@ class CsvImporter
             $counter++;
 
             // Sauvegarder en base de données toutes les 500 lignes sauvegardées puis un clear de l'entité pour éviter la surcharge de mémoire
-            if ($counter >= 500) {
+            if ($counter == 500) {
                 $this->entityManager->flush();
                 $this->entityManager->clear();
                 $counter = 0;
